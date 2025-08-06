@@ -2,174 +2,236 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><path fill='%234f46e5' d='M381.2 172.8C377.1 164.9 368.9 160 360 160h-156.6l50.84-127.1c2.969-7.375 2.062-15.78-2.406-22.38S239.1 0 232 0h-176C43.97 0 33.81 8.906 32.22 20.84l-32 240C-.7179 267.7 1.376 274.8 5.938 279.8C10.5 284.8 16.1 288 24 288h146.3l-41.78 194.1c-2.406 11.22 3.469 22.56 14 27.09C145.6 511.4 148.8 512 152 512c7.719 0 15.22-3.75 19.81-10.44l208-304C384.8 190.2 385.4 180.7 381.2 172.8z'/></svg>" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><path fill='%234f46e5' d='M381.2 172.8C377.1 164.9 368.9 160 360 160h-156.6l50.84-127.1c2.969-7.375 2.062-15.78-2.406-22.38S239.1 0 232 0h-176C43.97 0 33.81 8.906 32.22 20.84l-32 240C-.7179 267.7 1.376 274.8 5.938 279.8C10.5 284.8 16.1 288 24 288h146.3l-41.78 194.1c-2.406 11.22 3.469 22.56 14 27.09C145.6 511.4 148.8 512 152 512c7.719 0 15.22-3.75 19.81-10.44l208-304C384.8 190.2 385.4 180.7 381.2 172.8z'/></svg>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FocusAI</title>
+    <title>Sudais Bot</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%231e3a8a;stop-opacity:1'/><stop offset='100%' style='stop-color:%236b7280;stop-opacity:1'/></linearGradient></defs><circle cx='50' cy='50' r='50' fill='url(#grad)'/><text x='50' y='65' font-family='Arial, sans-serif' font-size='50' font-weight='bold' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'>SA</text></svg>" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%231e3a8a;stop-opacity:1'/><stop offset='100%' style='stop-color:%236b7280;stop-opacity:1'/></linearGradient></defs><circle cx='50' cy='50' r='50' fill='url(#grad)'/><text x='50' y='65' font-family='Arial, sans-serif' font-size='50' font-weight='bold' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'>SA</text></svg>">
     <style>
-        .fade-in {
-            animation: fadeIn 0.3s ease-in-out;
+        body {
+            background-color: #f4f4f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
+        .chat-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
         }
-        
-        .typing-effect::after {
-            content: '|';
-            animation: blink 1s infinite;
+        .sidebar {
+            width: 260px;
+            background-color: #202123;
+            color: #d1d5db;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #4b4b4b #202123;
         }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        }
-        
-        .message-shadow {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .scrollbar-custom::-webkit-scrollbar {
+        .sidebar::-webkit-scrollbar {
             width: 6px;
         }
-        
-        .scrollbar-custom::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
+        .sidebar::-webkit-scrollbar-track {
+            background: #202123;
         }
-        
-        .scrollbar-custom::-webkit-scrollbar-thumb {
-            background: #c7d2fe;
-            border-radius: 10px;
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #4b4b4b;
+            border-radius: 3px;
         }
-        
-        .scrollbar-custom::-webkit-scrollbar-thumb:hover {
-            background: #a5b4fc;
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            border-left: 1px solid #e5e5e5;
         }
-        
-        .pulse-animation {
-            animation: pulse 2s infinite;
+        .chat-history {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            scrollbar-width: thin;
+            scrollbar-color: #d1d5db #ffffff;
         }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .chat-history::-webkit-scrollbar {
+            width: 6px;
         }
-        
-        .social-card {
-            transition: all 0.3s ease;
-            transform: perspective(1000px) rotateX(0deg);
+        .chat-history::-webkit-scrollbar-track {
+            background: #ffffff;
         }
-        
-        .social-card:hover {
-            transform: perspective(1000px) rotateX(10deg);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        .chat-history::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 3px;
+        }
+        .message {
+            max-width: 80%;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.3s ease-in;
+        }
+        .user-message {
+            margin-left: auto;
+            background-color: #ececf1;
+            color: #343541;
+            padding: 1rem;
+            border-radius: 12px 12px 0 12px;
+        }
+        .ai-message {
+            background-color: #f7f7f8;
+            color: #343541;
+            padding: 1rem;
+            border-radius: 12px 12px 12px 0;
+        }
+        .input-area {
+            padding: 1.5rem;
+            border-top: 1px solid #e5e5e5;
+            background-color: #ffffff;
+        }
+        .input-area textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            resize: none;
+            font-size: 1rem;
+            line-height: 1.5;
+            transition: border-color 0.2s;
+            color: #343541;
+        }
+        .input-area textarea:focus {
+            outline: none;
+            border-color: #4b4b4b;
+            box-shadow: 0 0 0 2px rgba(75, 75, 75, 0.2);
+        }
+        .send-button {
+            background-color: #343541;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+        .send-button:hover {
+            background-color: #2a2b32;
+        }
+        .clear-button {
+            color: #6b7280;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: color 0.2s, background-color 0.2s;
+        }
+        .clear-button:hover {
+            color: #ef4444;
+            background-color: #f3f4f6;
+        }
+        .new-chat-button {
+            background-color: #343541;
+            color: #ffffff;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+        .new-chat-button:hover {
+            background-color: #2a2b32;
+        }
+        .sidebar-link {
+            color: #d1d5db;
+            transition: color 0.2s;
+        }
+        .sidebar-link:hover {
+            color: #ffffff;
+        }
+        .link-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+        }
+        .link-item i {
+            color: #6b7280;
+        }
+        .logo {
+            width: 24px;
+            height: 24px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="gradient-bg min-h-screen flex flex-col items-center p-4">
-    <div class="w-full max-w-3xl mx-auto">
-        <!-- Header Section -->
-        <div class="text-center mb-2">
-            <div class="flex items-center justify-center space-x-2">
-                <div class="bg-gradient-to-br from-indigo-500 to-purple-600 p-2 rounded-lg shadow-md transform hover:rotate-12 transition-transform duration-300">
-                    <i class="fas fa-bolt text-white text-xl"></i>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1"/><stop offset="100%" style="stop-color:#6b7280;stop-opacity:1"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(#grad)"/><text x="50" y="65" font-family="Arial, sans-serif" font-size="50" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">SA</text></svg>
+                    <h1 class="text-lg font-semibold">Sudais Bot</h1>
                 </div>
-             <h1 class="text-2xl font-bold text-indigo-700">Sudais Bot</h1>
+                <button id="newChatBtn" class="new-chat-button flex items-center gap-2">
+                    <i class="fas fa-plus"></i> New Chat
+                </button>
             </div>
-<p class="text-gray-600 text-sm">
-  OpenAI-powered coaching with purpose by 
-  <span class="text-indigo-600 font-semibold">Sudais Azlan</span>
-</p>
-            
+            <div class="mt-6">
+                <div class="space-y-2">
+                    <div class="link-item">
+                        <i class="fas fa-globe text-sm"></i>
+                        <a href="https://www.sudaisazlan.pro/" target="_blank" class="sidebar-link text-xs">Portfolio</a>
+                    </div>
+                    <div class="link-item">
+                        <i class="fab fa-github text-sm"></i>
+                        <a href="https://github.com/SudaisAxlan" target="_blank" class="sidebar-link text-xs">GitHub</a>
+                    </div>
+                    <div class="link-item">
+                        <i class="fas fa-envelope text-sm"></i>
+                        <a href="mailto:sudaisazlan09@gmail.com" class="sidebar-link text-xs">sudaisazlan09@gmail.com</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <!-- Main Chat Container -->
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+        <!-- Chat Area -->
+        <div class="chat-area">
             <!-- Chat History -->
-            <div id="chatHistory" class="h-96 overflow-y-auto p-4 scrollbar-custom space-y-4">
+            <div id="chatHistory" class="chat-history">
                 <!-- Welcome Message -->
-                <div class="flex items-start fade-in">
-                    <div class="bg-indigo-100 p-2 rounded-full mr-3 flex-shrink-0">
-                        <i class="fas fa-bolt text-indigo-600"></i>
+                <div class="message ai-message">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="font-semibold text-gray-800">Sudais Bot</span>
+                        <span class="bg-gray-600 text-white text-xs px-2 py-1 rounded-full">ChatGPT-4 API</span>
                     </div>
-                    <div class="flex-1">
-                        <div class="flex items-center mb-1">
-                            <span class="font-bold text-gray-800 mr-2">Sudais Bot</span>
-                            <span class="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-2 py-1 rounded-full flex items-center">
-                                <i class="fas fa-bolt mr-1 text-xs"></i> ChatGPT-4 API
-                            </span>
-                        </div>
-                        <div class="text-gray-700">
-                        <p>I'm Sudais Bot — built by <span class="font-semibold text-indigo-700">Sudais Azlan</span> to guide your performance journey.</p>                        </div>
-                    </div>
+                    <p class="text-gray-700">
+                        Sudais Bot by Sudais Azlan: Boost your performance with insights from <a href="https://www.sudaisazlan.pro/" target="_blank" class="text-blue-600 underline hover:text-blue-800">sudaisazlan.pro</a> and <a href="https://github.com/SudaisAxlan" target="_blank" class="text-blue-600 underline hover:text-blue-800">GitHub</a>.
+                    </p>
                 </div>
             </div>
-            
+
             <!-- Input Area -->
-            <div class="border-t border-gray-200 p-3 bg-gray-50">
-                <div class="relative">
+            <div class="input-area">
+                <div class="relative flex items-center">
                     <textarea 
                         id="userInput"
-                        class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm transition duration-200 pr-20"
                         rows="2"
-                        placeholder="Ask me anything about performance enhancement..."></textarea>
-                    <div class="absolute bottom-2 right-2 flex items-center space-x-2">
-                        <button 
-                            id="clearBtn"
-                            class="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-200 transition-all duration-200 hover:text-red-500 transform hover:scale-110"
-                            title="Clear conversation">
+                        placeholder="Ask me anything about performance enhancement..."
+                        class="pr-24"></textarea>
+                    <div class="absolute right-2 flex items-center gap-2">
+                        <button id="clearBtn" class="clear-button" title="Clear conversation">
                             <i class="fas fa-trash-alt text-sm"></i>
                         </button>
-                        <button
-                            id="sendBtn"
-                            class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium py-2 px-4 rounded-xl transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg active:scale-95 hover:scale-105">
-                            <i class="fas fa-paper-plane mr-2"></i> Send
+                        <button id="sendBtn" class="send-button flex items-center gap-2">
+                            <i class="fas fa-paper-plane"></i> Send
                         </button>
                     </div>
                 </div>
-                <div class="mt-1 text-xs text-gray-500 flex items-center">
-                    <i class="fas fa-info-circle mr-1 text-xs"></i> Press Shift+Enter for new line
+                <div class="text-xs text-gray-500 mt-1 flex items-center">
+                    <i class="fas fa-info-circle mr-1"></i> Press Shift+Enter for new line
                 </div>
             </div>
         </div>
-        
-        <!-- Social Links Section -->
-        <div class="mt-6 flex justify-center space-x-6">
-            
-            <a href="https://github.com/SudaisAxlan" target="_blank" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200">
-                <i class="fab fa-github text-2xl"></i>
-            </a>
-            <a href="https://www.sudaisazlan.pro/" target="_blank" class="text-gray-700 hover:text-purple-600 transition-colors duration-200">
-                <i class="fas fa-globe text-2xl"></i>
-            </a>
-            <a href="mailto:sudaisazlan09@gmail.com" class="text-gray-700 hover:text-red-600 transition-colors duration-200">
-                <i class="fas fa-envelope text-2xl"></i>
-            </a>
-        </div>
-        
-        <!-- Footer -->
-       
     </div>
-
-       <div class="mt-2 text-sm text-indigo-500 flex items-center justify-center space-x-2">
-
-                <span>Created by</span>
-                <a href="https://www.sudaisazlan.pro/" target="_blank" class="text-indigo-600 hover:underline ml-1">
-                    <i class="fas fa-external-link-alt text-xs"></i>
-                </a>
-                <a href="https://www.sudaisazlan.pro/" target="_blank" class="font-medium bg-indigo-100 px-2 py-1 rounded-full flex items-center hover:bg-indigo-200 transition">
-                    <i class="fas fa-user-tie mr-1 text-xs"></i> Sudais Azlan
-                </a>
-            </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -177,24 +239,18 @@
             const clearBtn = document.getElementById('clearBtn');
             const userInput = document.getElementById('userInput');
             const chatHistory = document.getElementById('chatHistory');
+            const newChatBtn = document.getElementById('newChatBtn');
             
             // Add user message to chat
             function addUserMessage(message) {
                 if (!message.trim()) return;
                 
                 const messageDiv = document.createElement('div');
-                messageDiv.className = 'flex items-start justify-end fade-in';
-                messageDiv. innerHTML = `
-                    <div class="flex-1 max-w-xs md:max-w-md lg:max-w-lg">
-                        <div class="bg-indigo-600 text-white p-3 rounded-lg rounded-tr-none message-shadow">
-                            <p>${message}</p>
-                        </div>
-                        <div class="text-right text-xs text-gray-500 mt-1">
-                            <i class="fas fa-user mr-1"></i> You
-                        </div>
-                    </div>
-                    <div class="bg-indigo-100 p-2 rounded-full ml-3 flex-shrink-0">
-                        <i class="fas fa-user text-indigo-600"></i>
+                messageDiv.className = 'message user-message';
+                messageDiv.innerHTML = `
+                    <p>${message}</p>
+                    <div class="text-right text-xs text-gray-500 mt-1">
+                        <i class="fas fa-user mr-1"></i> You
                     </div>
                 `;
                 chatHistory.appendChild(messageDiv);
@@ -204,22 +260,15 @@
             // Add AI response to chat
             function addAIResponse(response) {
                 const responseDiv = document.createElement('div');
-                responseDiv.className = 'flex items-start fade-in';
+                responseDiv.className = 'message ai-message';
                 responseDiv.innerHTML = `
-                    <div class="bg-indigo-100 p-2 rounded-full mr-3 flex-shrink-0">
-                        <i class="fas fa-bolt text-indigo-600"></i>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="font-semibold text-gray-800">Sudais Bot</span>
+                        <span class="bg-gray-600 text-white text-xs px-2 py-1 rounded-full flex items-center">
+                            <i class="fas fa-check-circle mr-1 text-xs"></i> AI Response
+                        </span>
                     </div>
-                    <div class="flex-1">
-                        <div class="flex items-center mb-1">
-                            <span class="font-bold text-gray-800 mr-2">FocusAI</span>
-                            <span class="bg-gradient-to-r from-green-500 to-teal-400 text-white text-xs px-2 py-1 rounded-full flex items-center">
-                                <i class="fas fa-check-circle mr-1 text-xs"></i> AI Response
-                            </span>
-                        </div>
-                        <div class="text-gray-700 bg-gray-50 p-3 rounded-lg rounded-tl-none message-shadow">
-                            <p>${response}</p>
-                        </div>
-                    </div>
+                    <p>${response}</p>
                 `;
                 chatHistory.appendChild(responseDiv);
                 chatHistory.scrollTop = chatHistory.scrollHeight;
@@ -277,6 +326,23 @@
             
             // Clear conversation
             clearBtn.addEventListener('click', function() {
+                userInput.value = '';
+                userInput.focus();
+            });
+
+            // Start new chat
+            newChatBtn.addEventListener('click', function() {
+                chatHistory.innerHTML = `
+                    <div class="message ai-message">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="font-semibold text-gray-800">Sudais Bot</span>
+                            <span class="bg-gray-600 text-white text-xs px-2 py-1 rounded-full">ChatGPT-4 API</span>
+                        </div>
+                        <p class="text-gray-700">
+                            Sudais Bot by Sudais Azlan: Boost your performance with insights from <a href="https://www.sudaisazlan.pro/" target="_blank" class="text-blue-600 underline hover:text-blue-800">sudaisazlan.pro</a> and <a href="https://github.com/SudaisAxlan" target="_blank" class="text-blue-600 underline hover:text-blue-800">GitHub</a>.
+                        </p>
+                    </div>
+                `;
                 userInput.value = '';
                 userInput.focus();
             });
